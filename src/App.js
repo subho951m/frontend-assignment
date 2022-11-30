@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import NavbarComp from "./components/NavbarComp";
+import FilterComp from "./components/FilterComp";
+import HomeComp from "./components/HomeComp";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavbarComp></NavbarComp>
+      <div className="search-filter">
+        <FilterComp></FilterComp>
+      </div>
+      <div className="content">
+        <HomeComp></HomeComp>
+      </div>
     </div>
   );
 }
