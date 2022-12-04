@@ -2,9 +2,9 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-function HomeComp({ currentdummyData, loading }) {
+function HomeComp({ currentDummyData, isLoading }) {
 
-  if(loading){
+  if(isLoading){
     return <h2 style={{ }}>Loading...</h2>;
   }
 
@@ -21,8 +21,8 @@ function HomeComp({ currentdummyData, loading }) {
   return (
     <div className="container">
         <Row xs={1} md={3} className="g-4 m-x-5">
-        {currentdummyData.map((data) => (
-            <Col>
+        {currentDummyData.map((data) => (
+            <Col key={data.id}>
             <Card>
                 <Card.Img variant="top" src="holder.js/100px160" />
                 <Card.Body>
