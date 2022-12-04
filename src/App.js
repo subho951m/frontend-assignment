@@ -11,6 +11,11 @@ function App() {
   
 
   const { dummyData, isLoading } = UseFetch();
+
+  //for filterComp
+  const uniquePlaces = Array.from( new Set( dummyData.map((data) => { return data.place; }) ) );
+  const maximumPrice = Math.max(...(dummyData.map((data) => { return Number(data.price.slice(1)); } )) );
+  const uniquePropertyTypes = Array.from( new Set( dummyData.map((data) => { return data.property; }) ) );
   
   //set page number
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +35,7 @@ function App() {
     <div className="App">
       <NavbarComp></NavbarComp>
       <div className="search-filter">
-        <FilterComp></FilterComp>
+        <FilterComp uniquePlaces={uniquePlaces} maximumPrice={maximumPrice} uniquePropertyTypes={uniquePropertyTypes} isLoading={isLoading}></FilterComp>
       </div>
       <div className="content">
         <HomeComp currentDummyData={currentDummyData} isLoading={isLoading}></HomeComp>
