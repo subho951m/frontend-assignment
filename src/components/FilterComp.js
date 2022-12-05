@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import { Outlet, useSearchParams } from 'react-router-dom';
 
 function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading }) {
   
@@ -27,6 +28,10 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
   const [propertyType, setPropertyType] = useState(uniquePropertyTypes[0]);
   const [price, setPrice] = useState('$' + priceRange[0][0] + ' - ' + '$' + priceRange[0][1]);
 
+
+
+  // const [srcprm, setSrcprm] = useSearchParams();
+
   if(isLoading){
     return <h2 style={{ }}>Loading...</h2>;
   }
@@ -41,11 +46,15 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
 
   
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const search = { place, moveIn, price, propertyType };
+    // const search = { place, moveIn, price, propertyType };
+    // setSrcprm({ filter: 'active' });
+    // console.log(srcprm);
   }
   
+  // console.log(srcprm);
 
   return (
     <Form onSubmit={handleSubmit}>
