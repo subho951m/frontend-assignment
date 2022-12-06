@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
-function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading }) {
+function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading, changeSearchParams }) {
   
   // calculate feasible price range for the given data
   const priceRange = [[0, 500]];
@@ -21,43 +21,40 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
   ( (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1) )
    + "-" + 
    ( (date.getDate()) < 10 ? '0' + (date.getDate()) : (date.getDate())) );
-  // console.log(formattedDate);
 
+
+  //parameters for filter dropdown
   const [place, setPlace] = useState(uniquePlaces[0]);
   const [moveIn, setMoveIn] = useState(moveInDate);
   const [propertyType, setPropertyType] = useState(uniquePropertyTypes[0]);
   const [price, setPrice] = useState('$' + priceRange[0][0] + ' - ' + '$' + priceRange[0][1]);
 
+  //logic to handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const search = { place, moveIn, price, propertyType };
+    console.log('Submit Button Pressed');
+    changeSearchParams({
+      filter: 'active',
+      location: search.place,
+      date: search.moveIn,
+      limit: search.price,
+      type: search.propertyType
+    });
+  }
 
-
-  // const [srcprm, setSrcprm] = useSearchParams();
+  //Reset Filter logic
+  const handleReset = () => {
+    changeSearchParams({ });
+  }
 
   if(isLoading){
     return <h2 style={{ }}>Loading...</h2>;
   }
-  
-  // console.log(uniquePlaces);
-  // console.log(maximumPrice);
-  // console.log(uniquePropertyTypes);
-  // console.log(isLoading);
-
-  // console.log(maximumPrice);
-  // console.log(priceRange);
-
-  
-
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // const search = { place, moveIn, price, propertyType };
-    // setSrcprm({ filter: 'active' });
-    // console.log(srcprm);
-  }
-  
-  // console.log(srcprm);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <div className="container">
+      <Form onSubmit={handleSubmit}>
       <Row className="align-items-center justify-content-md-center my-5">
         <Col xs="auto" className="mx-4">
             <Row xs="auto">
@@ -68,14 +65,14 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
                 ))}
             </Form.Select>
             </Row>
-            <p>{ place }</p>
+            { place }
         </Col>
 
         <Col xs="auto" className="mx-4">
             <Row xs="auto">
             <p className="w-100">Name</p>
             <input type="date" value={moveIn} onChange={(e) => setMoveIn(e.target.value) } />
-            <p>{ moveIn }</p>
+            { moveIn }
             </Row>
         </Col>
 
@@ -87,7 +84,7 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
                   <option key={data} value={data}>{ data }</option>
               ))}
             </Form.Select>
-            <p>{ propertyType }</p>
+            { propertyType }
             </Row>
         </Col>
         
@@ -96,7 +93,12 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
             <p className="w-100">Name</p>
             <Form.Select onChange={(e) => setPrice(e.target.value) } value={price}>
               {priceRange.map((data) => (
-                  <option key={'$' + data[0] + ' - ' + '$' + data[1]} value={data}>{ '$' + data[0] + ' - ' + '$' + data[1] }</option>
+                  <option 
+                  key={'$' + data[0] + ' - ' + '$' + data[1]} 
+                  value={'$' + data[0] + ' - ' + '$' + data[1]}
+                  >
+                    { '$' + data[0] + ' - ' + '$' + data[1] }
+                  </option>
               ))}
             </Form.Select>
             { price }
@@ -104,12 +106,15 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
         </Col>
             
         <Col xs="auto">
-        <Button>
+        <Button type="submit">
             Submit
         </Button>
         </Col>
       </Row>
     </Form>
+
+    <Button onClick={handleReset}>Reset</Button>
+    </div>
   );
 }
 

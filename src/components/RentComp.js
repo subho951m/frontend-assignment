@@ -5,6 +5,7 @@ import FilterComp from './FilterComp';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { useSearchParams, Outlet } from 'react-router-dom';
 
 
 function RentComp() {
@@ -16,44 +17,52 @@ function RentComp() {
   const maximumPrice = Math.max(...(dummyData.map((data) => { return Number(data.price.slice(1)); } )) );
   const uniquePropertyTypes = Array.from( new Set( dummyData.map((data) => { return data.property; }) ) );
   
-  //set page number
-  const [currentPage, setCurrentPage] = useState(1);
-  //set the number of tiles to be dispalyed per page
-  const [tilesPerPage, setTilesPerPage] = useState(11);
-
-  //logic of displaying posts in a page
-  const indexOfLastTile = currentPage * tilesPerPage;
-  const indexOfFirstTile = indexOfLastTile - tilesPerPage;
-  const currentDummyData = dummyData.slice(indexOfFirstTile, indexOfLastTile);
-
-  
-  //change page number
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-
   //filter
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const isFilter = searchParams.get('filter');
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // const changeSearchParams = (searchQuery) => {
-  //   setSearchParams(searchQuery);
-  //   console.log(searchParams);
-  // }
+  const changeSearchParams = (searchQuery) => {
+    setSearchParams(searchQuery);
+  }
+
+  useEffect(() => {
+    console.log('Filter Property Changes');
+    console.log(...searchParams);
+  }, [searchParams]);
+
+    //set page number
+    const [currentPage, setCurrentPage] = useState(1);
+    //set the number of tiles to be dispalyed per page
+    const [tilesPerPage, setTilesPerPage] = useState(11);
+  
+    //logic of displaying posts in a page
+    const indexOfLastTile = currentPage * tilesPerPage;
+    const indexOfFirstTile = indexOfLastTile - tilesPerPage;
+    const currentDummyData = dummyData.slice(indexOfFirstTile, indexOfLastTile);
+  
+    
+    //change page number
+    const paginate = pageNumber => setCurrentPage(pageNumber);  
+  
+  function dateFormat(inputDate) {
+    let formattedDate = (inputDate.getDate()) + "-" + (inputDate.getMonth() + 1) + "-" + (inputDate.getFullYear());
+    return formattedDate;
+  }
 
   if(isLoading){
     return <h2 style={{ }}>Loading...</h2>;
   }
 
-  function dateFormat(inputDate) {
-    let formattedDate = (inputDate.getDate()) + "-" + (inputDate.getMonth() + 1) + "-" + (inputDate.getFullYear());
-    return formattedDate;
-  }
-  
-
   return (
     
     <div className="container">
       <div className="search-filter">
-        <FilterComp uniquePlaces={uniquePlaces} maximumPrice={maximumPrice} uniquePropertyTypes={uniquePropertyTypes} isLoading={isLoading}></FilterComp>
+        <FilterComp 
+        uniquePlaces={uniquePlaces} 
+        maximumPrice={maximumPrice} 
+        uniquePropertyTypes={uniquePropertyTypes} 
+        isLoading={isLoading}
+        changeSearchParams={changeSearchParams}
+        ></FilterComp>
       </div>
       
       <div className="container">
