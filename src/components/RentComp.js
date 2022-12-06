@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-import UseFetch from './UseFetch'
 import RentFilterComp from './RentFilterComp';
-import { useSearchParams, Outlet } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import RentBodyComp from './RentBodyComp';
+import DataGenerator from "./DataGenerator";
 
 
 function RentComp() {
 
-  const { dummyData, isLoading } = UseFetch();
+  // const { dummyData, isLoading } = UseFetch();
+
+  const [dummyData, setdummyData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   //for filterComp
   const uniquePlaces = Array.from( new Set( dummyData.map((data) => { return data.place; }) ) );
@@ -16,30 +19,68 @@ function RentComp() {
   
   //filter
   const [searchParams, setSearchParams] = useSearchParams();
+  const [filterStatus, setFilterStatus] = useState("");
+  const [filterLocation, setFilterLocation] = useState("");
+  const [filterDate, setFilterDate] = useState("");
+  const [filterLimit, setFilterLimit] = useState("");
+  const [filterType, setFilterType] = useState("");
 
   const changeSearchParams = (searchQuery) => {
     setSearchParams(searchQuery);
   }
 
+  useEffect(() => {
+    const fetchData = () => {
+      setIsLoading(true);
+      //Function to create sample fake data
+      setdummyData(DataGenerator);
+      setIsLoading(false);
+    }
 
-  //display data
-  const [displayData, setDisplayData] = useState([]);
+    fetchData();
+  }, []);
   
 
+
   useEffect(() => {
-    console.log('Filter Property Changes');
-    console.log(...searchParams);
 
     //filter function
+    const filterFunction = () => {
+      if(searchParams.get('filter') === 'active'){
+        const location = searchParams.get('location');
+        const date = searchParams.get('date');
+        const limit = searchParams.get('limit');
+        const type = searchParams.get('type');
 
-    //pass data to display via cards
-
-    //update pagination component
-
-    setDisplayData(dummyData);
-
-    console.log(dummyData);
+        setFilterLocation(location);
+        setFilterDate(date);
+        setFilterLimit(limit);
+        setFilterType(type);
+      }
+    }
+    
+    filterFunction();
+    setFilterStatus(searchParams.get('filter'));
   }, [searchParams]);
+
+
+  //filter logic
+  function validateParameter  (obj, place, availableDate, property, price) {
+
+    let queryDate = new Date(availableDate);
+
+    var priceParts = price.split(' - ');
+    var lowerLimit = +priceParts[0].slice(1);
+    var upperLimit = +priceParts[1].slice(1);
+    var objPrice = +obj.price.slice(1);
+
+    return obj.place===place && obj.property===property && obj.availableDate <= queryDate && lowerLimit <= objPrice && objPrice <= upperLimit ;
+  }
+
+
+
+
+
 
   if(isLoading){
     return <h2 style={{ }}>Loading...</h2>;
@@ -58,9 +99,13 @@ function RentComp() {
         changeSearchParams={changeSearchParams}
         ></RentFilterComp>
       </div>
+
+      {filterStatus==='active'? "The filter is active with following parameters " + filterLocation + "  " + filterDate + " " + filterType + " " + filterLimit : "The filter is inactive"}
       
       <div className="container">
-        <RentBodyComp dummyData={dummyData}></RentBodyComp>
+        <RentBodyComp 
+        dummyData={ filterStatus === 'active'? dummyData.filter((obj) => validateParameter(obj, filterLocation, filterDate, filterType, filterLimit)) : dummyData }
+        ></RentBodyComp>
       </div>
       
     </div>

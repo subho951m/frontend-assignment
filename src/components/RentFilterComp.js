@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import { Outlet, useSearchParams } from 'react-router-dom';
+
 
 function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading, changeSearchParams }) {
   
@@ -33,7 +32,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
   const handleSubmit = (e) => {
     e.preventDefault();
     const search = { place, moveIn, price, propertyType };
-    console.log('Submit Button Pressed');
+    // console.log('Submit Button Pressed');
     changeSearchParams({
       filter: 'active',
       location: search.place,
