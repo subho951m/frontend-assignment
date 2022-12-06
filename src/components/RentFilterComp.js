@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
-function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading, changeSearchParams }) {
+function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading, changeSearchParams }) {
   
   // calculate feasible price range for the given data
   const priceRange = [[0, 500]];
@@ -118,4 +118,4 @@ function FilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading
   );
 }
 
-export default FilterComp;
+export default RentFilterComp;
