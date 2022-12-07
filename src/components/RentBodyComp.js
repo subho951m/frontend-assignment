@@ -52,6 +52,8 @@ const RentBodyComp = ( { dummyData } ) => {
             </div>
 
             <PaginationComp tilesPerPage={tilesPerPage} totalTiles={dummyData.length} paginate={paginate}></PaginationComp>
+
+            { dummyData.length===0 && <h3>Sorry nothing to display.</h3> }
         </div>
      );
 }

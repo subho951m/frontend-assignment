@@ -67,7 +67,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
             <Row xs="auto">
             <label className="w-100">Location</label>
             <Form.Select onChange={(e) => setPlace(e.target.value)} value={place}>
-                { <option key="AllPlaces" value="All">All Places</option> }
+                { <option key="AllPlaces" value="All">All Locations</option> }
                 {uniquePlaces.map((data) => (
                   <option key={data} value={data}>{ data }</option>
                 ))}
@@ -78,7 +78,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
 
         <Col xs="auto" className="mx-4">
             <Row xs="auto">
-            <p className="w-100">Name</p>
+            <p className="w-100">Move-In Date</p>
             <input type="date" value={moveIn} onChange={(e) => setMoveIn(e.target.value) } />
             { moveIn }
             </Row>
@@ -86,7 +86,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
 
         <Col xs="auto" className="mx-4">
             <Row xs="auto">
-            <p className="w-100">Name</p>
+            <p className="w-100">Property Type</p>
             <Form.Select onChange={(e) => setPropertyType(e.target.value) } value={propertyType}>
               { <option key="AllTypes" value="All">All Types</option> }
               {uniquePropertyTypes.map((data, idx) => (
@@ -99,7 +99,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
         
         <Col xs="auto" className="mx-4">
             <Row xs="auto">
-            <p className="w-100">Name</p>
+            <p className="w-100">Price Range</p>
             <Form.Select onChange={(e) => setPrice(e.target.value) } value={price}>
               { <option key="AllRanges" value="All">All Ranges</option> }
               {priceRange.map((data) => (
