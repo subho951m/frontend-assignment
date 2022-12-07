@@ -6,7 +6,10 @@ import BuyComp from './components/BuyComp';
 import ManagePropertyComp from './components/ManagePropertyComp';
 import ResourceComp from './components/ResourceComp';
 import SellComp from './components/SellComp';
+import LoginComp from './components/LoginComp';
+import SignupComp from './components/SignupComp';
 import PaginationComp from "./components/PaginationComp";
+import NotFound from "./components/NotFound";
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
@@ -18,11 +21,14 @@ function App() {
       <div className="content">
         <Routes>
           <Route exact path='/' element={<HomeComp/>} />
-          <Route exact path='/rent' element={<RentComp/>} />
-          <Route exact path='/buy' element={<BuyComp/>} />
-          <Route exact path='/sell' element={<SellComp/>} />
-          <Route exact path='/manage/:id' element={<ManagePropertyComp/>} />
-          <Route exact path='/resource/:id' element={<ResourceComp/>} />
+          <Route path='/rent' element={<RentComp/>} />
+          <Route path='/buy' element={<BuyComp/>} />
+          <Route path='/sell' element={<SellComp/>} />
+          <Route path='/manage/:id' element={<ManagePropertyComp/>} />
+          <Route path='/resource/:id' element={<ResourceComp/>} />          
+          <Route path='/login' element={<LoginComp/>} />          
+          <Route path='/signup' element={<SignupComp/>} />          
+          <Route path='*' element={<NotFound/>} />          
         </Routes>
       </div>
       <PaginationComp></PaginationComp>

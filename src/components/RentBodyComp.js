@@ -34,7 +34,7 @@ const RentBodyComp = ( { dummyData } ) => {
                 {currentDummyData.map((data) => (
                     <Col key={data.id}>
                     <Card>
-                        <Card.Img variant="top" src="holder.js/100px160" />
+                        <Card.Img variant="top" src={require(`./images/image_1.jpg`)} />
                         <Card.Body>
                         <Card.Title>{data.price}/month</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{data.name}</Card.Subtitle>
