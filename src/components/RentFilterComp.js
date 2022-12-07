@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { useSearchParams } from 'react-router-dom';
 
 
 function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoading, changeSearchParams }) {
@@ -41,6 +42,18 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
   const handleReset = () => {
     changeSearchParams({ });
   }
+
+  //change filter option according to url
+  const [filterParams, setFilterParams] = useSearchParams();
+  useEffect(() => {
+    if(filterParams.get('filter')==='active'){
+      setPlace(filterParams.get('location'));
+      setMoveIn(filterParams.get('date'));
+      setPropertyType(filterParams.get('type'));
+      setPrice(filterParams.get('limit'));
+    }
+  }, []);
+  
 
   if(isLoading){
     return <h2 style={{ }}>Loading...</h2>;
