@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react';
 import RentFilterComp from './RentFilterComp';
 import { useSearchParams } from 'react-router-dom';
 import RentBodyComp from './RentBodyComp';
-import DataGenerator from "./DataGenerator";
+import UseFetch from './UseFetch';
 
 
 function RentComp() {
 
-  // const { dummyData, isLoading } = UseFetch();
-
-  const [dummyData, setdummyData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  //Fetching Data
+  //We can also pass url to this and make it work
+  const { dummyData, isLoading } = UseFetch();
 
   //for filterComp
   const uniquePlaces = Array.from( new Set( dummyData.map((data) => { return data.place; }) ) );
@@ -28,19 +27,6 @@ function RentComp() {
   const changeSearchParams = (searchQuery) => {
     setSearchParams(searchQuery);
   }
-
-  useEffect(() => {
-    const fetchData = () => {
-      setIsLoading(true);
-      //Function to create sample fake data
-      setdummyData(DataGenerator);
-      setIsLoading(false);
-    }
-
-    fetchData();
-  }, []);
-  
-
 
   useEffect(() => {
 

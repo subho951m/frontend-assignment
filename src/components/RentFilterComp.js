@@ -15,18 +15,14 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
 
   //set move-in date to be default date
   const date = new Date();
-  let moveInDate = ( (date.getFullYear()) 
-  + '-' + 
-  ( (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1) )
-   + "-" + 
-   ( (date.getDate()) < 10 ? '0' + (date.getDate()) : (date.getDate())) );
+  let moveInDate = `${date.getFullYear()}-${date.getMonth()+1 < 10? `0${date.getMonth()+1}` : date.getMonth()+1}-${date.getDate() < 10? `0${date.getDate()}` : date.getDate()}`;
 
 
   //parameters for filter dropdown
   const [place, setPlace] = useState(uniquePlaces[0]);
   const [moveIn, setMoveIn] = useState(moveInDate);
   const [propertyType, setPropertyType] = useState(uniquePropertyTypes[0]);
-  const [price, setPrice] = useState('$' + priceRange[0][0] + ' - ' + '$' + priceRange[0][1]);
+  const [price, setPrice] = useState(`$${priceRange[0][0]}-$${priceRange[0][1]}`);
 
   //logic to handle submit
   const handleSubmit = (e) => {
@@ -93,10 +89,10 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
             <Form.Select onChange={(e) => setPrice(e.target.value) } value={price}>
               {priceRange.map((data) => (
                   <option 
-                  key={'$' + data[0] + ' - ' + '$' + data[1]} 
-                  value={'$' + data[0] + ' - ' + '$' + data[1]}
+                  key={`$${data[0]}-$${data[1]}`} 
+                  value={`$${data[0]}-$${data[1]}`}
                   >
-                    { '$' + data[0] + ' - ' + '$' + data[1] }
+                    { `$${data[0]}-$${data[1]}` }
                   </option>
               ))}
             </Form.Select>
