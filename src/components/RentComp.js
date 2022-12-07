@@ -30,7 +30,7 @@ function RentComp() {
 
   useEffect(() => {
 
-    //filter function
+    //Set filter parameters function
     const filterFunction = () => {
       if(searchParams.get('filter') === 'active'){
         const location = searchParams.get('location');
@@ -53,14 +53,27 @@ function RentComp() {
   //filter logic
   function validateParameter  (obj, place, availableDate, property, price) {
 
+    let flag = true;
+    if(place!=="All"){
+      flag = flag && (obj.place===place) ;
+    }
+
     let queryDate = new Date(availableDate);
+    flag = flag && (obj.availableDate <= queryDate);
 
-    var priceParts = price.split(' - ');
-    var lowerLimit = +priceParts[0].slice(1);
-    var upperLimit = +priceParts[1].slice(1);
-    var objPrice = +obj.price.slice(1);
+    if(property!=="All"){
+      flag = flag && (obj.property===property);
+    }
 
-    return obj.place===place && obj.property===property && obj.availableDate <= queryDate && lowerLimit <= objPrice && objPrice <= upperLimit ;
+    if(price!=="All"){
+      var priceParts = price.split('-');
+      var lowerLimit = +priceParts[0].slice(1);
+      var upperLimit = +priceParts[1].slice(1);
+      var objPrice = +obj.price.slice(1);
+      flag = flag && (lowerLimit <= objPrice && objPrice <= upperLimit);
+    }
+
+    return flag;
   }
 
 

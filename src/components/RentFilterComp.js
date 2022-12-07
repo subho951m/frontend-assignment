@@ -19,16 +19,15 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
 
 
   //parameters for filter dropdown
-  const [place, setPlace] = useState(uniquePlaces[0]);
+  const [place, setPlace] = useState("All");
   const [moveIn, setMoveIn] = useState(moveInDate);
-  const [propertyType, setPropertyType] = useState(uniquePropertyTypes[0]);
-  const [price, setPrice] = useState(`$${priceRange[0][0]}-$${priceRange[0][1]}`);
+  const [propertyType, setPropertyType] = useState("All");
+  const [price, setPrice] = useState("All");
 
   //logic to handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
     const search = { place, moveIn, price, propertyType };
-    // console.log('Submit Button Pressed');
     changeSearchParams({
       filter: 'active',
       location: search.place,
@@ -55,6 +54,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
             <Row xs="auto">
             <label className="w-100">Location</label>
             <Form.Select onChange={(e) => setPlace(e.target.value)} value={place}>
+                { <option key="AllPlaces" value="All">All Places</option> }
                 {uniquePlaces.map((data) => (
                   <option key={data} value={data}>{ data }</option>
                 ))}
@@ -75,6 +75,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
             <Row xs="auto">
             <p className="w-100">Name</p>
             <Form.Select onChange={(e) => setPropertyType(e.target.value) } value={propertyType}>
+              { <option key="AllTypes" value="All">All Types</option> }
               {uniquePropertyTypes.map((data, idx) => (
                   <option key={data} value={data}>{ data }</option>
               ))}
@@ -87,6 +88,7 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
             <Row xs="auto">
             <p className="w-100">Name</p>
             <Form.Select onChange={(e) => setPrice(e.target.value) } value={price}>
+              { <option key="AllRanges" value="All">All Ranges</option> }
               {priceRange.map((data) => (
                   <option 
                   key={`$${data[0]}-$${data[1]}`} 
