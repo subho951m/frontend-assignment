@@ -1,8 +1,5 @@
 import { Nav } from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
 import { useState } from "react";
 
 const PaginationComp = ({ tilesPerPage, totalTiles, paginate, changeTiles }) => {
@@ -34,7 +31,6 @@ const PaginationComp = ({ tilesPerPage, totalTiles, paginate, changeTiles }) => 
                     <option key="15" value="15">15</option>
                     <option key="18" value="18">18</option>
                 </Form.Select>
-                {/* <input type="text" className="form-control" onChange={(e) => changeTiles(e.target.value)}/> */}
                 </div>
             </div>
         </Nav>
