@@ -60,10 +60,10 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
   }
 
   return (
-    <div className="container">
       <Form onSubmit={handleSubmit}>
-      <Row className="align-items-center justify-content-md-center my-5">
-        <Col xs="auto" className="mx-4">
+      <div className="container my-3">
+      <Row className="d-flex justify-content-between">
+        <Col xs="auto" className="mx-4" style={{width: "9rem"}}>
             <Row xs="auto">
             <label className="w-100">Location</label>
             <Form.Select onChange={(e) => setPlace(e.target.value)} value={place}>
@@ -73,33 +73,30 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
                 ))}
             </Form.Select>
             </Row>
-            { place }
         </Col>
 
-        <Col xs="auto" className="mx-4">
+        <Col xs="auto" className="mx-4" style={{width: "9rem"}}>
             <Row xs="auto">
-            <p className="w-100">Move-In Date</p>
-            <input type="date" value={moveIn} onChange={(e) => setMoveIn(e.target.value) } />
-            { moveIn }
+            <label className="w-100">Date</label>
+            <input type="date" className="form-control" value={moveIn} onChange={(e) => setMoveIn(e.target.value) }/>
             </Row>
         </Col>
 
-        <Col xs="auto" className="mx-4">
+        <Col xs="auto" className="mx-4" style={{width: "9rem"}}>
             <Row xs="auto">
-            <p className="w-100">Property Type</p>
+            <label className="w-100">Property Type</label>
             <Form.Select onChange={(e) => setPropertyType(e.target.value) } value={propertyType}>
               { <option key="AllTypes" value="All">All Types</option> }
               {uniquePropertyTypes.map((data, idx) => (
                   <option key={data} value={data}>{ data }</option>
               ))}
             </Form.Select>
-            { propertyType }
             </Row>
         </Col>
         
-        <Col xs="auto" className="mx-4">
+        <Col xs="auto" className="mx-4" style={{width: "9rem"}}>
             <Row xs="auto">
-            <p className="w-100">Price Range</p>
+            <label className="w-100">Price Range</label>
             <Form.Select onChange={(e) => setPrice(e.target.value) } value={price}>
               { <option key="AllRanges" value="All">All Ranges</option> }
               {priceRange.map((data) => (
@@ -111,20 +108,19 @@ function RentFilterComp({ uniquePlaces, maximumPrice, uniquePropertyTypes, isLoa
                   </option>
               ))}
             </Form.Select>
-            { price }
             </Row>
         </Col>
             
-        <Col xs="auto">
-        <Button type="submit">
-            Submit
-        </Button>
+        <Col xs="auto" className="my-auto mx-4">
+          <Button type="submit">Submit</Button>
+        </Col>
+        
+        <Col xs="auto" className="my-auto mx-4">
+        <Button onClick={handleReset}>Reset</Button>
         </Col>
       </Row>
+      </div>
     </Form>
-
-    <Button onClick={handleReset}>Reset</Button>
-    </div>
   );
 }
 

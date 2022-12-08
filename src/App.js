@@ -31,7 +31,6 @@ function App() {
           <Route path='*' element={<NotFound/>} />          
         </Routes>
       </div>
-      <PaginationComp></PaginationComp>
       </div>
     </Router>
   );

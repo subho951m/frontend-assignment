@@ -77,10 +77,6 @@ function RentComp() {
   }
 
 
-
-
-
-
   if(isLoading){
     return <h2 style={{ }}>Loading...</h2>;
   }
@@ -98,14 +94,11 @@ function RentComp() {
         changeSearchParams={changeSearchParams}
         ></RentFilterComp>
       </div>
-
-      {filterStatus==='active'? "The filter is active with following parameters " + filterLocation + "  " + filterDate + " " + filterType + " " + filterLimit : "The filter is inactive"}
       
-      <div className="container">
-        <RentBodyComp 
-        dummyData={ filterStatus === 'active'? dummyData.filter((obj) => validateParameter(obj, filterLocation, filterDate, filterType, filterLimit)) : dummyData }
-        ></RentBodyComp>
-      </div>
+      <RentBodyComp 
+      dummyData={ filterStatus === 'active'? dummyData.filter((obj) => validateParameter(obj, filterLocation, filterDate, filterType, filterLimit)) : dummyData }
+      ></RentBodyComp>
+   
       
     </div>
   );
