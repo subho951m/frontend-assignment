@@ -2,7 +2,8 @@ import PaginationComp from './PaginationComp';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const RentBodyComp = ( { dummyData } ) => {
     
@@ -35,6 +36,13 @@ const RentBodyComp = ( { dummyData } ) => {
         let formattedDate = (inputDate.getDate()) + "-" + (inputDate.getMonth() + 1) + "-" + (inputDate.getFullYear());
         return formattedDate;
     }
+
+    //whenever url is changed set pagenuber = 1
+    const [urlChange, setUrlChange] = useSearchParams();
+    useEffect(() => {
+      setCurrentPage(1);
+    }, [urlChange]);
+    
 
 
     //hovering mouse on cards
