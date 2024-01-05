@@ -2,7 +2,7 @@ repo_name: subho951m/frontend-assignment
 report_id: 958e6147b985516037d83b56bb44dd64
 version: 0.1
 repo_type: Public
-timestamp: '2023-12-24T08:30:49+00:00'
+timestamp: '2024-01-05T08:16:28+00:00'
 requested_by: subho951m
 provider: github
 branch: master
@@ -16,6 +16,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/subho951m/frontend-assignment
   detection_source: Repo Metadata
 - name: JavaScript
   description: Lightweight, interpreted, object-oriented language with first-class
@@ -26,6 +27,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/subho951m/frontend-assignment
   detection_source: Repo Metadata
 - name: Bootstrap
   description: Simple and flexible HTML, CSS, and JS for popular UI components and
@@ -78,6 +80,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/subho951m/frontend-assignment
   detection_source: Repo Metadata
 - name: npm
   description: The package manager for JavaScript.
@@ -87,6 +90,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/subho951m/frontend-assignment/blob/master/package.json
   detection_source: package.json
   last_updated_by: Subham
   last_updated_on: 2022-11-30 05:53:03.000000000 Z
